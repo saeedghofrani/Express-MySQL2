@@ -1,0 +1,29 @@
+{
+  "name": "saeed-ghofrani-hw16-maktab62",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "ejs": "~2.6.1",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1"
+  },
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saeedghofrani/Saeed_Ghofrani_hw16_maktab62.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saeedghofrani/Saeed_Ghofrani_hw16_maktab62/issues"
+  },
+  "homepage": "https://github.com/saeedghofrani/Saeed_Ghofrani_hw16_maktab62#readme",
+  "description": ""
+}
