@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const morgan = require('morgan');
+const connection = require("./db/connection.db");
 const app = express();
 const appRouter = require('./routes/app.route.js');
 app.use(morgan('tiny'));
@@ -15,6 +16,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+connection().then(function (conn) {
+  global["connection"] = conn;
+  console.log('connected to' + ' MYSQL ' + ' database test');
+});
 app.use('/', appRouter);
 // catch 404 and forward to error handler
 app.use(function (_req, _res, next) { next(createError(404)); });

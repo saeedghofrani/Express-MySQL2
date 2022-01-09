@@ -1,0 +1,10 @@
+[
+  {
+    "database": {
+      "host": "localhost",
+      "user": "root",
+      "database": "test",
+      "password": "hajsaeed82"
+    }
+  }
+]
