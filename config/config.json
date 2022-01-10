@@ -3,7 +3,7 @@
     "database": {
       "host": "localhost",
       "user": "root",
-      "database": "test",
+      "database": "CRM",
       "password": "hajsaeed82"
     }
   }

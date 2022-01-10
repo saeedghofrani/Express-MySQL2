@@ -1,6 +1,6 @@
 const create = (request, response) => {
     const { name, phoneNumber, nationalCode } = request.body;
-    const sql = "INSERT INTO `test`.`manager` (`name`, `phoneNumber`, `nationalCode`) VALUES ( ?, ?, ?);";
+    const sql = "INSERT INTO `CRM`.`manager` (`name`, `phoneNumber`, `nationalCode`) VALUES ( ?, ?, ?);";
     const data = [name, phoneNumber, nationalCode];
     global.connection.query(
         sql,
@@ -13,7 +13,7 @@ const create = (request, response) => {
 };
 const update = (request, response) => {
     const { name, phoneNumber, nationalCode, where } = request.body;
-    const sql = "UPDATE `test`.`manager` SET `name` = ?, `phoneNumber` = ?, `nationalCode` = ? WHERE `id` = ?;";
+    const sql = "UPDATE `CRM`.`manager` SET `name` = ?, `phoneNumber` = ?, `nationalCode` = ? WHERE `idmanager` = ?;";
     const data = [name, phoneNumber, nationalCode, where];
     global.connection.query(
         sql,
@@ -36,7 +36,7 @@ const read = (_request, response) => {
 };
 const _delete = (request, response) => {
     const { where } = request.body;
-    const sql = "DELETE FROM manager WHERE `id` = ?";
+    const sql = "DELETE FROM manager WHERE `idmanager` = ?";
     const data = [where];
     global.connection.query(
         sql,

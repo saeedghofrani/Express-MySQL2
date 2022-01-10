@@ -1,6 +1,6 @@
 const create = (request, response) => {
     const { title, description } = request.body;
-    const sql = "INSERT INTO `test`.`project` (`title`, `description`) VALUES ( ?, ?);";
+    const sql = "INSERT INTO `CRM`.`project` (`title`, `description`) VALUES ( ?, ?);";
     const data = [title, description];
     global.connection.query(
         sql,
@@ -13,7 +13,7 @@ const create = (request, response) => {
 };
 const update = (request, response) => {
     const { title, description, where } = request.body;
-    const sql = "UPDATE `test`.`project` SET `title` = ?, `description` = ? WHERE `id` = ?;";
+    const sql = "UPDATE `CRM`.`project` SET `title` = ?, `description` = ? WHERE `idproject` = ?;";
     const data = [title, description, where];
     global.connection.query(
         sql,
@@ -36,7 +36,7 @@ const read = (_request, response) => {
 };
 const _delete = (request, response) => {
     const { where } = request.body;
-    const sql = "DELETE FROM project WHERE `id` = ?";
+    const sql = "DELETE FROM project WHERE `idproject` = ?";
     const data = [where];
     global.connection.query(
         sql,

@@ -18,7 +18,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 connection().then(function (conn) {
   global["connection"] = conn;
-  console.log('connected to' + ' MYSQL ' + ' database test');
+  console.log('connected to' + ' MYSQL ' + ' database CRM');
 });
 app.use('/', appRouter);
 // catch 404 and forward to error handler
