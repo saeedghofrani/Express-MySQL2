@@ -1,0 +1,123 @@
+{
+	"info": {
+		"_postman_id": "b25e395d-ff78-403f-a9dc-1031a0a50c78",
+		"name": "manager",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "manager/read",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/manager/read",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"manager",
+						"read"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "manager/create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"kamran\",\r\n    \"phoneNumber\": \"09154567898\",\r\n    \"natonalCode\": \"0890654578\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/manager/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"manager",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "manager/update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"where\": 4,\r\n    \"name\": \"KAMRANM\",\r\n    \"phoneNumber\": \"09154567898\",\r\n    \"natonalCode\": \"0890654578\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/manager/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"manager",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "manager/delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"where\": 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/manager/delete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"manager",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

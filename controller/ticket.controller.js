@@ -1,13 +1,25 @@
 const create = (request, response) => {
-    const { title, description, closedAt, createdAt, status, project_idproject, customer_idcustomer, manager_idmanager } = request.body;
-    const sql = "INSERT INTO `CRM`.`ticket` (`title`, `description`, `closedAt`, `createdAt`, `status`, `project_idproject`, `customer_idcustomer`, `manager_idmanager`) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
-    const data = [title, description, closedAt, createdAt, status, project_idproject, customer_idcustomer, manager_idmanager];
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+    }
+    const sql = "select idmanager from crm.manager;";
     global.connection.query(
         sql,
-        data,
         function (err, results, _fields) {
-            if (!!err) return response.status(500).send("correct your inputs" + err);
-            response.send({ results });
+            if (!!err) return response.status(500).send("server error");
+            const luckyNumber = getRandomInt(results.length);
+            const manager_idmanager = results[luckyNumber].idmanager;
+            const { title, description, closedAt, createdAt, status, project_idproject, customer_idcustomer } = request.body;
+            const sql = "INSERT INTO `CRM`.`ticket` (`title`, `description`, `closedAt`, `createdAt`, `status`, `project_idproject`, `customer_idcustomer`, `manager_idmanager`) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+            const data = [title, description, closedAt, createdAt, status, project_idproject, customer_idcustomer, manager_idmanager];
+            global.connection.query(
+                sql,
+                data,
+                function (err, results, _fields) {
+                    if (!!err) return response.status(500).send("correct your inputs" + err);
+                    response.send({ results });
+                }
+            );
         }
     );
 };
@@ -25,11 +37,15 @@ const update = (request, response) => {
     );
 };
 const read = (request, response) => {
+    const { project_idproject, customer_idcustomer, manager_idmanager } = request.body;
+    const sql = "SELECT * FROM `ticket` WHERE `project_idproject` = ? and `customer_idcustomer` = ? and `manager_idmanager` = ?;";
+    const data = [project_idproject, customer_idcustomer, manager_idmanager];
     global.connection.query(
-        "SELECT * FROM `ticket`",
+        sql,
+        data,
         function (err, results, fields) {
             console.log(fields);
-            if (!!err) return res.status(500).send("Internal server error.");
+            if (!!err) return response.status(500).send("Internal server error.");
             response.send({ results });
         }
     );

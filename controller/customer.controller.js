@@ -12,9 +12,9 @@ const create = (request, response) => {
     );
 };
 const update = (request, response) => {
-    const { type, name, income, phoneNumber, where } = request.body;
-    const sql = "UPDATE `CRM`.`customer` SET `type` = ?, `name` = ?, `income` = ?, `phoneNumber` = ? WHERE `idcustomer` = ?;";
-    const data = [type, name, income, phoneNumber, where];
+    const { Ctype, name, income, phoneNumber, where } = request.body;
+    const sql = "UPDATE `CRM`.`customer` SET `Ctype` = ?, `name` = ?, `income` = ?, `phoneNumber` = ? WHERE `idcustomer` = ?;";
+    const data = [Ctype, name, income, phoneNumber, where];
     global.connection.query(
         sql,
         data,
@@ -25,8 +25,9 @@ const update = (request, response) => {
     );
 };
 const read = (request, response) => {
+    const sql = "SELECT * FROM `customer`";
     global.connection.query(
-        "SELECT * FROM `customer`",
+        sql,
         function (err, results, _fields) {
             if (!!err) return response.status(500).send(err);
             response.send({ results });

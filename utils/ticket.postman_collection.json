@@ -1,0 +1,125 @@
+{
+	"info": {
+		"_postman_id": "92ef311c-fa93-4fec-b38c-9afa7ddca5d3",
+		"name": "ticket",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ticket/read",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"customer_idcustomer\": 1,\r\n    \"manager_idmanager\": 1,\r\n    \"project_idproject\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/ticket/read",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"ticket",
+						"read"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ticket/create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"asd\",\r\n    \"description\": \"asd as asd asd app\",\r\n    \"closedAt\": \"2021-02-28\",\r\n    \"createdAt\": \"2021-01-24\",\r\n    \"status\": \"A\",\r\n    \"solution\": \"sdsdsd\",\r\n    \"project_idproject\": 2,\r\n    \"customer_idcustomer\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/ticket/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"ticket",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ticket/update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"where\": 4,\r\n    \"title\": \"unhandled error\",\r\n    \"description\": \"unhandled error in mobile app\",\r\n    \"closedAt\": \"2021-12-28\",\r\n    \"createdAt\": \"2021-11-24\",\r\n    \"status\": \"B\",\r\n    \"solution\": \"debug\",\r\n    \"project_idproject\": 1,\r\n    \"customer_idcustomer\": 1,\r\n    \"manager_idmanager\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/ticket/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"ticket",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ticket/delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"where\": 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/ticket/delete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"ticket",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

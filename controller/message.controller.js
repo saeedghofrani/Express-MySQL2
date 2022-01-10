@@ -13,7 +13,7 @@ const create = (request, response) => {
 };
 const update = (request, response) => {
     const { sender, body, createdAt, ticket_idticket, where } = request.body;
-    const sql = "UPDATE `crm`.`message` SET `sender` = ?, `body` = ?, `createdAt` = ?, `ticket_idticket` = ? WHERE `idmessage` = ?);";
+    const sql = "UPDATE `crm`.`message` SET `sender` = ?, `body` = ?, `createdAt` = ?, `ticket_idticket` = ? WHERE `idmessage` = ?;";
     const data = [sender, body, createdAt, ticket_idticket, where];
     global.connection.query(
         sql,
