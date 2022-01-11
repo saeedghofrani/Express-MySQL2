@@ -8,6 +8,9 @@ const create = (request, response) => {
         sql,
         function (err, results, _fields) {
             if (!!err) return response.status(500).send("server error");
+            if (results === 'undefined' || results.length < 0 || results === []) {
+                response.status(500).send("there is no manager!");
+            }
             const luckyNumber = getRandomInt(results.length);
             const manager_idmanager = results[luckyNumber].idmanager;
             const { title, description, closedAt, createdAt, status, project_idproject, customer_idcustomer } = request.body;
