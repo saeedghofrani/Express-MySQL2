@@ -16,7 +16,7 @@ const create = (request, response) => {
             const { title, description, closedAt, createdAt, status, project_idproject, customer_idcustomer } = request.body;
             const sql = "INSERT INTO `CRM`.`ticket` (`title`, `description`, `closedAt`, `createdAt`, `status`, `project_idproject`, `customer_idcustomer`, `manager_idmanager`) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
             const data = [title, description, closedAt, createdAt, status, project_idproject, customer_idcustomer, manager_idmanager];
-            mysqlQuery(sql, data, response);
+            mysqlQuery(sql, response, data);
         }
     );
 };
@@ -24,18 +24,18 @@ const update = (request, response) => {
     const { title, description, closedAt, createdAt, status, solution, project_idproject, customer_idcustomer, manager_idmanager, where } = request.body;
     const sql = "UPDATE `crm`.`ticket` SET `title` = ?, `description` = ?, `createdAt` = ?,`closedAt` = ?, `status` = ?, `solution` = ?, `project_idproject` =?, `customer_idcustomer` = ?, `manager_idmanager` = ? WHERE `idticket` = ?;";
     const data = [title, description, closedAt, createdAt, status, solution, project_idproject, customer_idcustomer, manager_idmanager, where];
-    mysqlQuery(sql, data, response);
+    mysqlQuery(sql, response, data);
 };
 const read = (request, response) => {
     const { project_idproject, customer_idcustomer, manager_idmanager } = request.body;
     const sql = "SELECT * FROM `ticket` WHERE `project_idproject` = ? and `customer_idcustomer` = ? and `manager_idmanager` = ?;";
     const data = [project_idproject, customer_idcustomer, manager_idmanager];
-    mysqlQuery(sql, data, response);
+    mysqlQuery(sql, response, data);
 };
 const _delete = (request, response) => {
     const { where } = request.body;
     const sql = "DELETE FROM ticket WHERE `idticket` = ?";
     const data = [where];
-    mysqlQuery(sql, data, response);
+    mysqlQuery(sql, response, data);
 };
 module.exports = { create, update, read, _delete };
