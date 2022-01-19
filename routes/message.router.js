@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const { create, update, read, _delete } = require('../controller/message.controller.js');
-router.post('/create', create);
-router.get('/read', read);
-router.post('/update', update);
-router.post('/delete', _delete);
+router.route('/')
+    .get(read)
+    .post(create);
+router.route('/:id')
+    .patch(update)
+    .delete(_delete);
 module.exports = router;

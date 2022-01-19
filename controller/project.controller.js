@@ -1,46 +1,26 @@
 const mysqlQuery = require('../modules/query.module.js');
+const { checkUserproject } = require('../modules/checkUser.module.js');
+const read = (_request, response) => {
+    const sql = "SELECT * FROM `project`";
+    mysqlQuery(sql, response, 200, "read");
+};
 const create = (request, response) => {
     const { title, description } = request.body;
     const sql = "INSERT INTO `CRM`.`project` (`title`, `description`) VALUES ( ?, ?);";
     const data = [title, description];
-    mysqlQuery(sql, response, data);
+    mysqlQuery(sql, response, 201, "create", data);
 };
 const update = (request, response) => {
-    const { title, description, where, col } = request.body;
-    let sql;
-    switch (col) {
-        case 'title':
-            sql = "UPDATE `CRM`.`project` SET `title` = ?, `description` = ? WHERE `title` = ?;";
-            break;
-        case 'description':
-            sql = "UPDATE `CRM`.`project` SET `title` = ?, `description` = ? WHERE `description` = ?;";
-            break;
-        case 'idproject':
-            sql = "UPDATE `CRM`.`project` SET `title` = ?, `description` = ? WHERE `idproject` = ?;";
-            break;
-    }
-    const data = [title, description, where];
-    mysqlQuery(sql, response, data);
-};
-const read = (_request, response) => {
-    const sql = "SELECT * FROM `project`";
-    mysqlQuery(sql, response);
+    const id = request.params.id;
+    const { title, description } = request.body;
+    const sql = "UPDATE `CRM`.`project` SET `title` = ?, `description` = ? WHERE `idproject` = ?;";
+    const data = [title, description, id];
+    (checkUserproject(id)) ? response.status(404).send('wrong id') : mysqlQuery(sql, response, 202, "update", data);
 };
 const _delete = (request, response) => {
-    const { where, col } = request.body;
-    let sql;
-    switch (col) {
-        case 'title':
-            sql = "DELETE FROM project WHERE `title` = ?";
-            break;
-        case 'description':
-            sql = "DELETE FROM project WHERE `description` = ?";
-            break;
-        case 'idproject':
-            sql = "DELETE FROM project WHERE `idproject` = ?";
-            break;
-    }
-    const data = [where];
-    mysqlQuery(sql, response, data);
+    const id = request.params.id;
+    const sql = "DELETE FROM project WHERE `idproject` = ?";
+    const data = [id];
+    (checkUserproject(id)) ? response.status(404).send('wrong id') : mysqlQuery(sql, response, 202, "delete", data);
 };
 module.exports = { create, update, read, _delete };

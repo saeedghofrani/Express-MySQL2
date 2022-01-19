@@ -1,4 +1,11 @@
 const mysqlQuery = require('../modules/query.module.js');
+const { checkUserticket } = require('../modules/checkUser.module.js');
+const read = (request, response) => {
+    const { Cid, Mid, Pid } = request.query;
+    const sql = "SELECT * FROM `ticket` WHERE `project_idproject` = ? and `customer_idcustomer` = ? and `manager_idmanager` = ?;";
+    const data = [Cid, Mid, Pid];
+    mysqlQuery(sql, response, 200, "read", data);
+};
 const create = (request, response) => {
     function getRandomInt(max) {
         return Math.floor(Math.random() * max);
@@ -16,26 +23,21 @@ const create = (request, response) => {
             const { title, description, closedAt, createdAt, status, project_idproject, customer_idcustomer } = request.body;
             const sql = "INSERT INTO `CRM`.`ticket` (`title`, `description`, `closedAt`, `createdAt`, `status`, `project_idproject`, `customer_idcustomer`, `manager_idmanager`) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
             const data = [title, description, closedAt, createdAt, status, project_idproject, customer_idcustomer, manager_idmanager];
-            mysqlQuery(sql, response, data);
+            mysqlQuery(sql, response, 201, "create", data);
         }
     );
 };
 const update = (request, response) => {
+    const id = request.params.id;
     const { title, description, closedAt, createdAt, status, solution, project_idproject, customer_idcustomer, manager_idmanager, where } = request.body;
     const sql = "UPDATE `crm`.`ticket` SET `title` = ?, `description` = ?, `createdAt` = ?,`closedAt` = ?, `status` = ?, `solution` = ?, `project_idproject` =?, `customer_idcustomer` = ?, `manager_idmanager` = ? WHERE `idticket` = ?;";
     const data = [title, description, closedAt, createdAt, status, solution, project_idproject, customer_idcustomer, manager_idmanager, where];
-    mysqlQuery(sql, response, data);
-};
-const read = (request, response) => {
-    const { project_idproject, customer_idcustomer, manager_idmanager } = request.body;
-    const sql = "SELECT * FROM `ticket` WHERE `project_idproject` = ? and `customer_idcustomer` = ? and `manager_idmanager` = ?;";
-    const data = [project_idproject, customer_idcustomer, manager_idmanager];
-    mysqlQuery(sql, response, data);
+    (checkUserticket(id)) ? response.status(404).send('wrong id') : mysqlQuery(sql, response, 202, "update", data);
 };
 const _delete = (request, response) => {
-    const { where } = request.body;
+    const id = request.params.id;
     const sql = "DELETE FROM ticket WHERE `idticket` = ?";
-    const data = [where];
-    mysqlQuery(sql, response, data);
+    const data = [id];
+    (checkUserticket(id)) ? response.status(404).send('wrong id') : mysqlQuery(sql, response, 202, "delete", data);
 };
 module.exports = { create, update, read, _delete };
