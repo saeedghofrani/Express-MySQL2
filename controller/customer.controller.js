@@ -12,6 +12,9 @@ const create = (request, response) => {
 };
 const update = (request, response) => {
     const id = request.params.id;
+    if (isNaN(id)) {
+        return response.status(409).send("url param is invalid");
+    }
     const { Ctype, name, income, phoneNumber } = request.body;
     const sql = "UPDATE `CRM`.`customer` SET `Ctype` = ?, `name` = ?, `income` = ?, `phoneNumber` = ? WHERE `idcustomer` = ?;";
     const data = [Ctype, name, income, phoneNumber, id];
@@ -19,7 +22,9 @@ const update = (request, response) => {
 };
 const _delete = (request, response) => {
     const id = request.params.id;
-    console.log(request);
+    if (isNaN(id)) {
+        return response.status(409).send("url param is invalid");
+    }
     const sql = "DELETE FROM customer WHERE `idcustomer` = ?";
     const data = [id];
     console.log(checkUserCustomer(id));

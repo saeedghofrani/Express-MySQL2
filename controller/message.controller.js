@@ -12,6 +12,9 @@ const create = (request, response) => {
 };
 const update = (request, response) => {
     const id = request.params.id;
+    if (isNaN(id)) {
+        return response.status(409).send("url param is invalid");
+    }
     const { sender, body, createdAt, ticket_idticket } = request.body;
     const sql = "UPDATE `crm`.`message` SET `sender` = ?, `body` = ?, `createdAt` = ?, `ticket_idticket` = ? WHERE `idmessage` = ?;";
     const data = [sender, body, createdAt, ticket_idticket, id];
@@ -19,6 +22,9 @@ const update = (request, response) => {
 };
 const _delete = (request, response) => {
     const id = request.params.id;
+    if (isNaN(id)) {
+        return response.status(409).send("url param is invalid");
+    }
     const sql = "DELETE FROM message WHERE `idmessage` = ?";
     const data = [id];
     (checkUsermessage(id)) ? response.status(404).send('wrong id') : mysqlQuery(sql, response, 202, "delete", data);
